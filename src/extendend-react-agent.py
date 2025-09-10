@@ -1,7 +1,6 @@
 from langgraph.prebuilt import create_react_agent
 from langchain_community.agent_toolkits.openapi.toolkit import RequestsToolkit
 from langchain_community.utilities.requests import TextRequestsWrapper
-from tools.response_callback import ResponseCallback
 
 tools = RequestsToolkit(
     requests_wrapper=TextRequestsWrapper(headers={}),
@@ -13,6 +12,7 @@ SYSTEM_PROMPT = """
 You are my personal bug bounty hunting assistant. \
 You will help me find vulnerabilities in web applications.
 """
+
 
 agent = create_react_agent(
     model="anthropic:claude-sonnet-4-20250514",
@@ -34,5 +34,6 @@ result = agent.invoke(
             }
         ]
     },
-    {"recursion_limit": 100, "callbacks": [ResponseCallback()]},
+    {"recursion_limit": 100},
 )
+print(result)

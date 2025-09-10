@@ -1,2 +1,5 @@
 .python-version
 .DS_Store
+__pycache__
+.venv
+.env
