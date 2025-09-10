@@ -1,0 +1,40 @@
+:root {
+  /* default theme color */
+  /* can be overrided by uses `themeConfig` option */
+  --slidev-theme-primary: #5d8392;
+}
+
+.slidev-layout.cover h1, .slidev-layout.intro h1 {
+    font-size: 2.5rem !important;
+    line-height: 1;
+    line-height: 4rem;
+}
+
+.slidev-layout.cover,
+.slidev-layout.intro {
+  @apply h-full grid;
+
+  h1 {
+    @apply text-5xl leading-20;
+  }
+
+  h1 + p {
+    @apply -mt-2 opacity-50 mb-4;
+  }
+
+  p + h2,
+  ul + h2,
+  table + h2 {
+    @apply mt-10;
+  }
+}
+
+.two-cols-header {
+  grid-template-rows: none !important;
+  grid-column-gap: 30px;
+}
+
+.two-cols-header .col-bottom {
+  min-height: 50px;
+  padding-bottom: 10px;
+}
