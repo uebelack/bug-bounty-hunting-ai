@@ -111,28 +111,21 @@ layout: fact
 <img src="./images/violation.png"/>
 
 ---
-layout: two-cols-header
----
 
-# What is an LLM?
+# What is a LLM?
 
 **A Large Language Model (LLM) is a type of artificial intelligence designed to understand, predict, and generate human-like text.**
 
-::left::
+<img src="./images/llm.svg" style="margin-top: 50px;"/>
 
-Large Language Models are limited
+---
 
-* 🛑 They are **static** – once trained, they don’t increase their knowledge
-* 🧠 They **can’t memorize** new information afterwards
-* 🔀 They **can't handle** tasks that require multiple steps
+# What is an AI Agent?
 
-::right::
+An AI agent is a system that takes a goal, uses a large language model (LLM) and tools, and iterates until the goal is achieved.
 
-But we can build things around them to make these limitations less of a problem. ✨
+<img src="./images/agents.svg" style="padding-bottom: 20px;"/>
 
-- 📚 **Retrieval-Augmented Generation (RAG)** as memory or domain specific knowledge
-- 🔌 **Tools & APIs** (e.g. Model Context Protocols) for real-world actions
-- 🤖 **AI Agents** for multi-step workflows
 
 ---
 layout: two-cols-header

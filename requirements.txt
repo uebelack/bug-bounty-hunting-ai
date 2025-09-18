@@ -3,3 +3,4 @@ langgraph-prebuilt
 langchain-core
 langchain-community
 langchain[anthropic]
+wappalyzer
