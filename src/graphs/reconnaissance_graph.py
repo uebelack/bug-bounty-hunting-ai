@@ -1,10 +1,8 @@
-from langchain_core.prompts import prompt
-from helpers.response_callback import ResponseCallback
 from langchain_community.agent_toolkits.openapi.toolkit import RequestsToolkit
 from langchain_community.utilities.requests import TextRequestsWrapper
-from langchain_core.messages import SystemMessage, HumanMessage, BaseMessage
+from langchain_core.messages import SystemMessage, HumanMessage
 from langchain_core.tools import tool
-from langchain.chat_models import init_chat_model
+from langchain_core.language_models.chat_models import BaseChatModel
 from langgraph.graph import StateGraph, START, END, MessagesState
 from langgraph.prebuilt import tools_condition, ToolNode
 from wappalyzer import analyze
@@ -28,55 +26,49 @@ def wappalyzer(url: str):
     return json.dumps(analyze(url))
 
 
-class State(MessagesState):
+class ReconnaissanceState(MessagesState):
     base_url: str
     reconnaissance: str
 
 
-llm = init_chat_model("anthropic:claude-sonnet-4-20250514", max_tokens=8192)
+def create_reconnaissance_graph(llm: BaseChatModel):
+    tools = [wappalyzer, *http_tools]
+    llm_with_tools = llm.bind_tools(tools)
+    graph_builder = StateGraph(ReconnaissanceState)
 
+    def reconnoitre(state: ReconnaissanceState):
+        print(f"🛠️ Reconnoitre ...")
+        response = llm_with_tools.invoke(
+            [
+                SystemMessage(
+                    content="You are a passive reconnaissance assistant for a bug-bounty engagement. \
+                        Only perform passive OSINT; do not run active scans or exploit attempts. \
+                        Produce: \
+                        1) executive summary, \
+                        2) asset inventory (CSV), \
+                        3) prioritized findings table (no exploit steps), \
+                        4) sources/evidence list, \
+                        5) recommended safe next steps. \
+                        Log all sources and timestamps."
+                ),
+                HumanMessage(content=f"The target website is {state['base_url']}."),
+            ]
+            + state["messages"]
+        )
+        return {"messages": response}
 
-# Reconnaissance Phase - gather information about the target website
-tools = [wappalyzer, *http_tools]
-llm = llm.bind_tools([wappalyzer, *http_tools])
-graph_builder = StateGraph(State)
+    def store_reconnaissance(state: ReconnaissanceState):
+        print(f"🛠️ Storing reconnaissance ...")
+        return {"reconnaissance": state["messages"][-1].content}
 
+    graph_builder.add_node("reconnoitre", reconnoitre)
+    graph_builder.add_node("tools", ToolNode(tools))
+    graph_builder.add_node("store_reconnaissance", store_reconnaissance)
 
-def reconnoitre(state: State):
-    print(f"🛠️ Reconnoitre ...")
-    response = llm.invoke(
-        [
-            SystemMessage(
-                content="You are a passive reconnaissance assistant for a bug-bounty engagement. \
-                    Only perform passive OSINT; do not run active scans or exploit attempts. \
-                    Produce: \
-                    1) executive summary, \
-                    2) asset inventory (CSV), \
-                    3) prioritized findings table (no exploit steps), \
-                    4) sources/evidence list, \
-                    5) recommended safe next steps. \
-                    Log all sources and timestamps."
-            ),
-            HumanMessage(content=f"The target website is {state['base_url']}."),
-        ]
-        + state["messages"]
-    )
-    return {"messages": response}
+    graph_builder.add_edge(START, "reconnoitre")
+    graph_builder.add_conditional_edges("reconnoitre", tools_condition)
+    graph_builder.add_edge("tools", "reconnoitre")
+    graph_builder.add_edge("reconnoitre", "store_reconnaissance")
+    graph_builder.add_edge("store_reconnaissance", END)
 
-
-def store_reconnaissance(state: State):
-    print(f"🛠️ Storing reconnaissance ...")
-    return {"reconnaissance": state["messages"][-1].content}
-
-
-graph_builder.add_node("reconnoitre", reconnoitre)
-graph_builder.add_node("tools", ToolNode(tools))
-graph_builder.add_node("store_reconnaissance", store_reconnaissance)
-
-graph_builder.add_edge(START, "reconnoitre")
-graph_builder.add_conditional_edges("reconnoitre", tools_condition)
-graph_builder.add_edge("tools", "reconnoitre")
-graph_builder.add_edge("reconnoitre", "store_reconnaissance")
-graph_builder.add_edge("store_reconnaissance", END)
-
-reconnaissance_graph = graph_builder.compile()
+    return graph_builder.compile()

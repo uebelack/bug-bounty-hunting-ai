@@ -1,58 +1,58 @@
 from langchain_core.messages import SystemMessage, HumanMessage
-from langchain.chat_models import init_chat_model
+from langchain_core.language_models.chat_models import BaseChatModel
 from langgraph.graph import StateGraph, START, END
 from typing import List, TypedDict
 from pydantic import BaseModel, Field
 
-llm = init_chat_model("anthropic:claude-sonnet-4-20250514", max_tokens=8192)
 
-
-class PlanItem(BaseModel):
+class Task(BaseModel):
     title: str = Field(
-        description="Descriptive title for this specific testing phase or security assessment task (e.g., 'Directory Enumeration', 'Authentication Testing', 'Input Validation Analysis')",
+        description="Descriptive title for this specific security assessment task \
+            (e.g., 'Directory Enumeration', 'Authentication Testing', 'Input Validation Analysis')",
     )
-    prompt: str = Field(
-        description="Detailed instruction prompt that guides the agent on how to execute this specific testing phase, including objectives, methodologies, tools to use, success criteria, and expected deliverables",
+    instructions: str = Field(
+        description="Detailed instructions that guides the bug bounty hunter agent \
+            on how to execute this specific task, including objectives, methodologies, \
+            tools to use, success criteria, and expected deliverables",
     )
 
 
 class Plan(BaseModel):
-    items: List[PlanItem] = Field(
-        description="Ordered sequence of security testing phases and assessment tasks to be executed during the bug bounty engagement, prioritized by risk level and logical testing progression (reconnaissance → enumeration → vulnerability assessment → exploitation → post-exploitation)",
+    tasks: List[Task] = Field(
+        description="List of tasks to be executed during the bug bounty engagement",
     )
 
 
 class State(TypedDict):
     base_url: str
     reconnaissance: str
-    plan: List[PlanItem]
+    plan: List[Task]
 
 
-def plan(state: State):
-    print(f"🛠️ Planning ...")
-    response = llm.with_structured_output(Plan).invoke(
-        [
-            SystemMessage(
-                content=(
-                    "You are a planning assistant for a bug-bounty engagement. "
-                    "Using the provided recon outputs, produce a compact, topic-focused test plan that assigns different testers to cover specific vulnerability categories (OWASP Top 10 + API, business logic, misconfigurations, supply-chain). "
-                    "Requirements: 1) Confirm written authorization and scope before any active/authenticated steps; if none, produce passive-only plans. "
-                    "2) Do NOT include exploit steps, payloads, or bypass techniques — only high-level scenarios and remediation. "
-                    "Deliverables (concise): for each topic produce a scenario ID, objective, allowed technique level (passive | authorized active | authenticated), preconditions, success/detection criteria, evidence to collect, remediation notes, and priority. "
-                    "Tone: precise, risk-aware, and machine-readable where possible."
-                )
-            ),
-            HumanMessage(content=f"The target website is {state['base_url']}."),
-        ]
-    )
-
-    return {"plan": response.items}
+SYSTEM_PROMPT = """
+You are a planning assistant for a bug-bounty engagement.
+Using the provided recon outputs, produce a compact, topic-focused test plan that assigns 
+different testers to cover specific vulnerability categories (OWASP Top 10 + API, business logic, 
+misconfigurations, supply-chain).
+"""
 
 
-graph_builder = StateGraph(State)
-graph_builder.add_node("plan", plan)
+def create_planning_graph(llm: BaseChatModel):
+    def plan(state: State):
+        print(f"🛠️ Planning ...")
+        response = llm.with_structured_output(Plan).invoke(
+            [
+                SystemMessage(content=(SYSTEM_PROMPT)),
+                HumanMessage(content=f"The target website is {state['base_url']}."),
+            ]
+        )
 
-graph_builder.add_edge(START, "plan")
-graph_builder.add_edge("plan", END)
+        return {"plan": response.tasks}
 
-planning_graph = graph_builder.compile()
+    graph_builder = StateGraph(State)
+    graph_builder.add_node("plan", plan)
+
+    graph_builder.add_edge(START, "plan")
+    graph_builder.add_edge("plan", END)
+
+    return graph_builder.compile()

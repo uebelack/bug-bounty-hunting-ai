@@ -5,6 +5,9 @@ import os
 
 def cached(key: str, callback: Callable):
     def wrapper(state: object) -> object:
+        if not os.path.exists("cache"):
+            os.makedirs("cache")
+
         if os.path.exists(f"cache/{key}.pkl"):
             with open(f"cache/{key}.pkl", "rb") as f:
                 return pickle.load(f)

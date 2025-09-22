@@ -1,64 +1,114 @@
-from planning_graph import PlanItem
-
-
-def execute_plan_item(state: State):
-    print(f"🛠️ Executing plan item {state['plan_item_index']} ...")
-    print(f"🛠️ Plan: {state['plan'].items}")
-    plan_item = state["plan"].items[state["plan_item_index"]]
-    print(f"🛠️ Plan item: {plan_item.title}")
-    print(f"🛠️ Plan item prompt: {plan_item.prompt}")
-
-    response = llm.invoke(
-        [
-            SystemMessage(content=plan_item.prompt),
-            HumanMessage(
-                content=f"The target website is {state['base_url']}. The plan item is {plan_item.title}."
-            ),
-        ]
-    )
-    return {"plan_item": response, "plan_item_index": state["plan_item_index"] + 1}
-
-
+from langgraph.prebuilt import tools_condition, ToolNode
+from graphs.planning_graph import Task
+from langchain_community.agent_toolkits.openapi.toolkit import RequestsToolkit
+from langchain_community.utilities.requests import TextRequestsWrapper
 from langchain_core.messages import SystemMessage, HumanMessage
-from langchain.chat_models import init_chat_model
-from langgraph.graph import StateGraph, START, END
-from typing import List, TypedDict
+from langchain_core.language_models.chat_models import BaseChatModel
+from langgraph.graph import StateGraph, START, END, MessagesState
+from typing import List
 from pydantic import BaseModel, Field
 
-llm = init_chat_model("anthropic:claude-sonnet-4-20250514", max_tokens=8192)
+http_tools = RequestsToolkit(
+    requests_wrapper=TextRequestsWrapper(headers={}),
+    allow_dangerous_requests=True,
+).get_tools()
 
 
-class State(TypedDict):
-    base_url: str
-    reconnaissance: str
-    plan: List[PlanItem]
-
-
-def plan(state: State):
-    print(f"🛠️ Planning ...")
-    response = llm.with_structured_output(Plan).invoke(
-        [
-            SystemMessage(
-                content=(
-                    "You are a planning assistant for a bug-bounty engagement. "
-                    "Using the provided recon outputs, produce a compact, topic-focused test plan that assigns different testers to cover specific vulnerability categories (OWASP Top 10 + API, business logic, misconfigurations, supply-chain). "
-                    "Requirements: 1) Confirm written authorization and scope before any active/authenticated steps; if none, produce passive-only plans. "
-                    "2) Do NOT include exploit steps, payloads, or bypass techniques — only high-level scenarios and remediation. "
-                    "Deliverables (concise): for each topic produce a scenario ID, objective, allowed technique level (passive | authorized active | authenticated), preconditions, success/detection criteria, evidence to collect, remediation notes, and priority. "
-                    "Tone: precise, risk-aware, and machine-readable where possible."
-                )
-            ),
-            HumanMessage(content=f"The target website is {state['base_url']}."),
-        ]
+class Report(BaseModel):
+    title: str = Field(
+        description="Concise title of the finding (e.g., 'SQL Injection in login endpoint')",
+    )
+    description: str = Field(
+        description="Detailed description of the finding, including background and affected functionality",
+    )
+    impact: str = Field(
+        description="Business or technical impact of the finding (e.g., data leakage, privilege escalation)",
+    )
+    severity: str = Field(
+        description="Severity rating of the finding (e.g., Low, Medium, High, Critical)",
+    )
+    steps_to_reproduce: List[str] = Field(
+        description="Step-by-step guide to reproduce the issue",
+    )
+    recommendations: str = Field(
+        description="Security recommendations and mitigation steps",
     )
 
-    return {"plan": response.items}
+
+class Reports(BaseModel):
+    reports: List[Report] = Field(
+        description="List of reports",
+    )
 
 
-graph_builder = StateGraph(State)
-graph_builder.add_node("plan", plan)
+class ExecutionState(MessagesState):
+    base_url: str
+    reconnaissance: str
+    task: Task
+    index: int = 0
 
-graph_builder.add_edge(START, "plan")
-graph_builder.add_edge("plan", END)
 
-planning_graph = graph_builder.compile()
+SYSTEM_PROMPT = """
+You are a bug bounty hunter part of a team of bug bounty hunters.
+The reconnaissance team has already completed the reconnaissance phase and
+the planning team has already created a test plan.
+Your job is to execute one of the test plan items and find vulnerabilities in the target website.
+You will use the tools provided to you to execute the test plan item.
+"""
+
+
+def create_execution_graph(llm: BaseChatModel):
+    tools = [*http_tools]
+    llm_with_tools = llm.bind_tools(tools)
+
+    def execute(state: ExecutionState):
+        print(f"🛠️ Executing ...")
+
+        prompt = f"""Task: 
+{state['task'].title}
+{state['task'].instructions}
+
+Reconnaissance:
+{state['reconnaissance']}
+
+Target website:
+{state['base_url']}
+
+Please execute the task and find vulnerabilities in the target website.
+You will report the vulnerabilities you find to the team.
+Use the tools provided to you to execute the task.
+"""
+
+        response = llm_with_tools.invoke(
+            [
+                SystemMessage(content=SYSTEM_PROMPT),
+                HumanMessage(content=prompt),
+            ]
+            + state["messages"]
+        )
+        return {"messages": response}
+
+    def report(state: ExecutionState):
+        structured_llm_with_tools = llm.with_structured_output(Reports)
+        response = structured_llm_with_tools.invoke(
+            state["messages"]
+            + [
+                HumanMessage(
+                    content="Please create a structured report for each vulnerability you found."
+                )
+            ]
+        )
+        return {"reports": response.reports}
+
+    graph_builder = StateGraph(ExecutionState)
+    graph_builder.add_node("execute", execute)
+    graph_builder.add_node("report", report)
+    graph_builder.add_node("tools", ToolNode(tools))
+
+    graph_builder.add_edge(START, "execute")
+    graph_builder.add_conditional_edges("execute", tools_condition)
+    graph_builder.add_edge("tools", "execute")
+    graph_builder.add_edge("execute", "report")
+    graph_builder.add_edge("report", END)
+
+    return graph_builder.compile()
