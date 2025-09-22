@@ -1,10 +1,10 @@
 from helpers.response_callback import ResponseCallback
 from langchain.chat_models import init_chat_model
 from langgraph.graph import StateGraph, START, END
-from typing import TypedDict, List
+from typing import TypedDict, List, Callable
 from graphs.reconnaissance_graph import reconnaissance_graph
 from graphs.planning_graph import planning_graph, PlanItem
-from langgraph.types import CachePolicy
+from helpers.cached import cached
 
 
 class State(TypedDict):
@@ -14,22 +14,23 @@ class State(TypedDict):
 
 
 def reconnoitre(state: State):
-    subgraph_output = reconnaissance_graph.invoke({"base_url": state["base_url"]})
+    subgraph_output = cached("reconnaissance", reconnaissance_graph.invoke)(
+        {"base_url": state["base_url"]}
+    )
     return {"reconnaissance": subgraph_output["reconnaissance"]}
 
 
 def plan(state: State):
-    subgraph_output = planning_graph.invoke(
+    subgraph_output = cached("plan", planning_graph.invoke)(
         {"base_url": state["base_url"], "reconnaissance": state["reconnaissance"]}
     )
-    print(subgraph_output)
     return {"plan": subgraph_output["plan"]}
 
 
 llm = init_chat_model("anthropic:claude-sonnet-4-20250514", max_tokens=8192)
 
 graph_builder = StateGraph(State)
-graph_builder.add_node("reconnaissance", reconnoitre, cache_policy=CachePolicy())
+graph_builder.add_node("reconnaissance", reconnoitre)
 graph_builder.add_node("plan", plan)
 
 graph_builder.add_edge(START, "reconnaissance")

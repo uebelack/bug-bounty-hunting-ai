@@ -22,16 +22,13 @@ class Plan(BaseModel):
     )
 
 
-class InputState(TypedDict):
+class State(TypedDict):
     base_url: str
     reconnaissance: str
-
-
-class OutputState(TypedDict):
     plan: List[PlanItem]
 
 
-def plan(state: InputState) -> OutputState:
+def plan(state: State):
     print(f"🛠️ Planning ...")
     response = llm.with_structured_output(Plan).invoke(
         [
@@ -49,15 +46,10 @@ def plan(state: InputState) -> OutputState:
         ]
     )
 
-    # print titles
-    print(f"🛠️ Plan:")
-    for item in response.items:
-        print(f"- {item.title}")
-
     return {"plan": response.items}
 
 
-graph_builder = StateGraph(InputState)
+graph_builder = StateGraph(State)
 graph_builder.add_node("plan", plan)
 
 graph_builder.add_edge(START, "plan")
