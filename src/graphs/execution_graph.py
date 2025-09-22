@@ -2,7 +2,7 @@ from langgraph.prebuilt import tools_condition, ToolNode
 from graphs.planning_graph import Task
 from langchain_community.agent_toolkits.openapi.toolkit import RequestsToolkit
 from langchain_community.utilities.requests import TextRequestsWrapper
-from langchain_core.messages import SystemMessage, HumanMessage
+from langchain_core.messages import SystemMessage, HumanMessage, AIMessage, ToolMessage
 from langchain_core.language_models.chat_models import BaseChatModel
 from langgraph.graph import StateGraph, START, END, MessagesState
 from typing import List
@@ -61,7 +61,7 @@ def create_execution_graph(llm: BaseChatModel):
     tools = [*http_tools]
     llm_with_tools = llm.bind_tools(tools)
 
-    def execute(state: ExecutionState):
+    def execute_task(state: ExecutionState):
         print(f"🛠️ Executing ...")
 
         prompt = f"""Task: 
@@ -88,7 +88,7 @@ Use the tools provided to you to execute the task.
         )
         return {"messages": response}
 
-    def report(state: ExecutionState):
+    def create_report(state: ExecutionState):
         structured_llm_with_tools = llm.with_structured_output(Reports)
         response = structured_llm_with_tools.invoke(
             state["messages"]
@@ -101,14 +101,20 @@ Use the tools provided to you to execute the task.
         return {"reports": response.reports}
 
     graph_builder = StateGraph(ExecutionState)
-    graph_builder.add_node("execute", execute)
-    graph_builder.add_node("report", report)
+    graph_builder.add_node("execute_task", execute_task)
     graph_builder.add_node("tools", ToolNode(tools))
+    graph_builder.add_node("create_report", create_report)
 
-    graph_builder.add_edge(START, "execute")
-    graph_builder.add_conditional_edges("execute", tools_condition)
-    graph_builder.add_edge("tools", "execute")
-    graph_builder.add_edge("execute", "report")
-    graph_builder.add_edge("report", END)
+    graph_builder.add_edge(START, "execute_task")
+    graph_builder.add_conditional_edges(
+        "execute_task",
+        tools_condition,
+        {
+            "tools": "tools",
+            "end": "create_report",
+        },
+    )
+    graph_builder.add_edge("tools", "execute_task")
+    graph_builder.add_edge("create_report", END)
 
     return graph_builder.compile()

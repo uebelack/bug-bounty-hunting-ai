@@ -66,9 +66,15 @@ def create_reconnaissance_graph(llm: BaseChatModel):
     graph_builder.add_node("store_reconnaissance", store_reconnaissance)
 
     graph_builder.add_edge(START, "reconnoitre")
-    graph_builder.add_conditional_edges("reconnoitre", tools_condition)
+    graph_builder.add_conditional_edges(
+        "reconnoitre",
+        tools_condition,
+        {
+            "tools": "tools",
+            "end": "store_reconnaissance",
+        },
+    )
     graph_builder.add_edge("tools", "reconnoitre")
-    graph_builder.add_edge("reconnoitre", "store_reconnaissance")
     graph_builder.add_edge("store_reconnaissance", END)
 
     return graph_builder.compile()
