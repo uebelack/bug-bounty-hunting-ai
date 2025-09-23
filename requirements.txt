@@ -3,4 +3,5 @@ langgraph-prebuilt
 langchain-core
 langchain-community
 langchain[anthropic]
+langchain-google-vertexai
 wappalyzer

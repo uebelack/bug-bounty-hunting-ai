@@ -7,7 +7,9 @@ from graphs.planning_graph import create_planning_graph, Task
 from graphs.execution_graph import create_execution_graph
 from helpers.cached import cached
 
-llm = init_chat_model("anthropic:claude-sonnet-4-20250514", max_tokens=8192)
+# llm = init_chat_model("anthropic:claude-sonnet-4-20250514", max_tokens=8192)
+llm = init_chat_model("gpt-4o-mini")
+
 reconnaissance_graph = create_reconnaissance_graph(llm)
 planning_graph = create_planning_graph(llm)
 execution_graph = create_execution_graph(llm)
@@ -45,6 +47,7 @@ def plan(state: State):
     return {"plan": subgraph_output["plan"]}
 
 
+# Execution Phase - execute the test plan items
 def execute(state: State):
     index = state.get("plan_index", 0)
     subgraph_output = execution_graph.invoke(
@@ -60,36 +63,28 @@ def execute(state: State):
 
 
 def execution_routing(state: State):
-    if state["plan_index"] < len(state["plan"]):
+    if state["plan_index"] < 1:  # len(state["plan"]):
         return "execute"
     else:
-        return "finalize"
+        return END
 
-
-def store_reports(state: State):
-    print(state["reports"])
-    return {}
-
-
-llm = init_chat_model("anthropic:claude-sonnet-4-20250514", max_tokens=8192)
 
 graph_builder = StateGraph(State)
 graph_builder.add_node("reconnaissance", reconnoitre)
 graph_builder.add_node("plan", plan)
 graph_builder.add_node("execute", execute)
-graph_builder.add_node("store_reports", store_reports)
 
 graph_builder.add_edge(START, "reconnaissance")
 graph_builder.add_edge("reconnaissance", "plan")
 graph_builder.add_edge("plan", "execute")
 graph_builder.add_conditional_edges("execute", execution_routing)
-graph_builder.add_edge("store_reports", END)
 
 graph = graph_builder.compile()
-
-# print(graph.get_graph(xray=1).draw_mermaid())
 
 graph.invoke(
     {"base_url": "http://localhost:3000"},
     {"recursion_limit": 100, "callbacks": [ResponseCallback()]},
 )
+
+
+# print(graph.get_graph().draw_mermaid())

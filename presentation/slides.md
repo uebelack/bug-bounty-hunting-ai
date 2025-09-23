@@ -184,10 +184,16 @@ layout: fact
 layout: center
 ---
 
-# Conclusion TBD
+# Learnings
 
 * Can be really expensive, but cheap compared to a human
-* Prompt, Context too long
+* Prompt, Context too long, js files
+* Model really behave differently, don't expect your are application works the same way with different models
+* Can't see that one was better than another
+* Perhaps another approach would be give access to a browser and to burp suite
+* Because of the context limitation its hard to make sure that the agent to do the same thing again and again
+* You can give a LLM a big task you have to split it up into small ones, the smaller and more detailed the instrucations the better the results
+
 
 ---
 <div style="display: flex; flex-direction: column; align-items: center;">
