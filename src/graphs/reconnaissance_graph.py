@@ -38,6 +38,7 @@ def create_reconnaissance_graph(llm: BaseChatModel):
 
     def reconnoitre(state: ReconnaissanceState):
         print(f"🛠️ Reconnoitre ...")
+        recent_messages = state["messages"][-10:] if "messages" in state else []
         response = llm_with_tools.invoke(
             [
                 SystemMessage(
@@ -53,7 +54,7 @@ def create_reconnaissance_graph(llm: BaseChatModel):
                 ),
                 HumanMessage(content=f"The target website is {state['base_url']}."),
             ]
-            + state["messages"]
+            + recent_messages
         )
         return {"messages": response}
 
@@ -71,7 +72,7 @@ def create_reconnaissance_graph(llm: BaseChatModel):
         tools_condition,
         {
             "tools": "tools",
-            "end": "store_reconnaissance",
+            END: "store_reconnaissance",
         },
     )
     graph_builder.add_edge("tools", "reconnoitre")

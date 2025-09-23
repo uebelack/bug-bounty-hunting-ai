@@ -43,8 +43,8 @@ class Reports(BaseModel):
 
 class ExecutionState(MessagesState):
     base_url: str
-    reconnaissance: str
     task: Task
+    reports: List[Report]
     index: int = 0
 
 
@@ -67,9 +67,6 @@ def create_execution_graph(llm: BaseChatModel):
         prompt = f"""Task: 
 {state['task'].title}
 {state['task'].instructions}
-
-Reconnaissance:
-{state['reconnaissance']}
 
 Target website:
 {state['base_url']}
@@ -111,7 +108,7 @@ Use the tools provided to you to execute the task.
         tools_condition,
         {
             "tools": "tools",
-            "end": "create_report",
+            END: "create_report",
         },
     )
     graph_builder.add_edge("tools", "execute_task")

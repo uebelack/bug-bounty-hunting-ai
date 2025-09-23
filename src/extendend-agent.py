@@ -34,6 +34,14 @@ def plan(state: State):
     subgraph_output = cached("plan", planning_graph.invoke)(
         {"base_url": state["base_url"], "reconnaissance": state["reconnaissance"]}
     )
+
+    # print title and instructions of each task
+    print("Tasks:")
+    for task in subgraph_output["plan"]:
+        print("- " + task.title)
+
+    subgraph_output["plan"]
+
     return {"plan": subgraph_output["plan"]}
 
 
@@ -42,13 +50,12 @@ def execute(state: State):
     subgraph_output = execution_graph.invoke(
         {
             "base_url": state["base_url"],
-            "reconnaissance": state["reconnaissance"],
             "task": state["plan"][index],
         }
     )
     return {
         "plan_index": index + 1,
-        "reports": state["reports"] + subgraph_output["reports"],
+        "reports": state.get("reports", []) + subgraph_output["reports"],
     }
 
 
@@ -56,7 +63,12 @@ def execution_routing(state: State):
     if state["plan_index"] < len(state["plan"]):
         return "execute"
     else:
-        return END
+        return "finalize"
+
+
+def store_reports(state: State):
+    print(state["reports"])
+    return {}
 
 
 llm = init_chat_model("anthropic:claude-sonnet-4-20250514", max_tokens=8192)
@@ -65,12 +77,13 @@ graph_builder = StateGraph(State)
 graph_builder.add_node("reconnaissance", reconnoitre)
 graph_builder.add_node("plan", plan)
 graph_builder.add_node("execute", execute)
+graph_builder.add_node("store_reports", store_reports)
 
 graph_builder.add_edge(START, "reconnaissance")
 graph_builder.add_edge("reconnaissance", "plan")
 graph_builder.add_edge("plan", "execute")
 graph_builder.add_conditional_edges("execute", execution_routing)
-graph_builder.add_edge("execute", END)
+graph_builder.add_edge("store_reports", END)
 
 graph = graph_builder.compile()
 
