@@ -1,8 +1,10 @@
+import requests
+from langchain_core.tools import tool
 from langgraph.prebuilt import tools_condition, ToolNode
 from graphs.planning_graph import Task
 from langchain_community.agent_toolkits.openapi.toolkit import RequestsToolkit
 from langchain_community.utilities.requests import TextRequestsWrapper
-from langchain_core.messages import SystemMessage, HumanMessage, AIMessage, ToolMessage
+from langchain_core.messages import SystemMessage, HumanMessage
 from langchain_core.language_models.chat_models import BaseChatModel
 from langgraph.graph import StateGraph, START, END, MessagesState
 from typing import List
@@ -12,6 +14,43 @@ http_tools = RequestsToolkit(
     requests_wrapper=TextRequestsWrapper(headers={}),
     allow_dangerous_requests=True,
 ).get_tools()
+
+
+@tool
+def upload(
+    url: str,
+    filename: str,
+    content: str,
+    additional_data: dict = None,
+    headers: dict = None,
+) -> str:
+    """Upload a file to the target website"""
+
+    files = {filename: content}
+    response = requests.post(
+        url, files=files, data=additional_data or {}, headers=headers or {}, timeout=30
+    )
+
+    max_response_length = 50000
+
+    raw_response = (
+        f"HTTP/{response.raw.version/10:.1f} {response.status_code} {response.reason}\n"
+    )
+    for header, value in response.headers.items():
+        raw_response += f"{header}: {value}\n"
+    raw_response += "\n"
+
+    # Truncate response body if too long
+    response_text = response.text
+    if len(response_text) > max_response_length:
+        response_text = (
+            response_text[:max_response_length]
+            + f"\n\n[Response truncated - showing first {max_response_length} characters]"
+        )
+
+    raw_response += response_text
+
+    return raw_response
 
 
 class Report(BaseModel):
@@ -54,11 +93,14 @@ The reconnaissance team has already completed the reconnaissance phase and
 the planning team has already created a test plan.
 Your job is to execute one of the test plan items and find vulnerabilities in the target website.
 You will use the tools provided to you to execute the test plan item.
+Please create a report directly after you have found a vulnerability and 
+then continue looking for more vulnerabilities, so that we can remove the earlier tool 
+responses from the conversation history.
 """
 
 
 def create_execution_graph(llm: BaseChatModel):
-    tools = [*http_tools]
+    tools = [*http_tools, upload]
     llm_with_tools = llm.bind_tools(tools)
 
     def execute_task(state: ExecutionState):
