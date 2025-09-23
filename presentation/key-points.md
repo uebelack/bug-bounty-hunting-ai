@@ -44,6 +44,10 @@ Attempt #1
 * Doesn't really work, you can make Chat GPT to a simple security scan of your own website
 * And it's violating the terms of Chat GPT
 
+Juice Shop
+* ...
+* ...
+
 What is an LLM?
 
 * AI trained to understand and generate text

@@ -186,6 +186,9 @@ layout: center
 
 # Conclusion TBD
 
+* Can be really expensive, but cheap compared to a human
+* Prompt, Context too long
+
 ---
 <div style="display: flex; flex-direction: column; align-items: center;">
   <img src="./images/questions.jpg" style="width: 80%;"/>
