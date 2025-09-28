@@ -158,27 +158,83 @@ A framework for building complex, stateful AI agent workflows with advanced orch
 Both are frameworks for Python, but there are equivalents for JavaScript / TypeScript (**LangChain.js**) and Java (**LangChain4j**).
 
 ---
+layout: two-cols-header
+---
+
+# 🧃 OWASP Juice Shop
+
+::left::
+
+OWASP Juice Shop is a modern, insecure web app used for security training, with hacking challenges and as a 'guinea pig' for security tools.
+
+::right::
+
+<img src="./images/juice.png"/>
+
+::bottom::
+https://owasp.org/www-project-juice-shop/
+
+---
 layout: fact
 ---
 
 # Attempt #2
 
 ---
-
-# News
-
-<div style="display: flex; flex-direction: column; align-items: center; gap: 5px;">
-  <img src="./images/news02.jpg" style="width: 70%;"/>
-  <img src="./images/news03.jpg" style="width: 70%;"/>
-  <img src="./images/news01.jpg" style="width: 70%;"/>
-</div>
-
+layout: two-cols-header
 ---
-layout: fact
+
+# Attempt #2 - Result
+
+::left::
+
+* Runtime: **2.5m**
+* Tokens: **1.144.127**
+* Costs: **3.47$**
+* Hacking Challenges Solved: **11**
+
+::right::
+
+<img src="./images/attempt-2-juice.png" style="width: 85%"/>
+
+
 ---
 
 # Attempt #3
 
+Three-phase workflow agent
+
+* **Reconnaissance**: Identify vulnerabilities and attack vectors through systematic target analysis
+* **Plan**: Develop prioritized, actionable tasks based on reconnaissance findings
+* **Execute & Report**: Execute planned tasks and generate comprehensive vulnerability reports
+
+<img src="./images/extended-agent.svg" style="padding-top: 30px;"/>
+
+
+https://github.com/uebelack/bug-bounty-hunting-ai
+---
+layout: two-cols-header
+---
+
+# Attempt #3 - Result
+
+::left::
+
+* Runtime: **73m**
+* Tokens: **21'242'728**
+* Costs: **65.59$**
+* Hacking Challenges Solved: **18**
+
+
+::right::
+
+<img src="./images/attempt-3-juice.png" style="width: 85%"/>
+
+---
+layout: center
+---
+
+TBD
 
 ---
 layout: center
@@ -200,3 +256,12 @@ layout: center
   <img src="./images/questions.jpg" style="width: 80%;"/>
 </div>
 
+---
+
+# News
+
+<div style="display: flex; flex-direction: column; align-items: center; gap: 5px;">
+  <img src="./images/news02.jpg" style="width: 70%;"/>
+  <img src="./images/news03.jpg" style="width: 70%;"/>
+  <img src="./images/news01.jpg" style="width: 70%;"/>
+</div>

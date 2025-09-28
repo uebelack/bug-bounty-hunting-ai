@@ -46,19 +46,25 @@ def create_reporting_graph(llm: BaseChatModel):
 
     def create_report(state: ReportingState):
         structured_llm_with_tools = llm.with_structured_output(Reports)
-        response = structured_llm_with_tools.invoke(
-            state["messages"]
-            + [
-                HumanMessage(
-                    content="Please create a structured report for each vulnerability."
-                )
-            ]
-        )
-        return {"reports": response.reports}
+        try:
+            response = structured_llm_with_tools.invoke(
+                state["messages"]
+                + [
+                    HumanMessage(
+                        content="Please create a structured report for each vulnerability."
+                    )
+                ]
+            )
+            return {"reports": response.reports}
+        except Exception as e:
+            print(e)
+            return {"reports": []}
 
     graph_builder = StateGraph(ReportingState)
     graph_builder.add_node("create_report", create_report)
     graph_builder.add_edge(START, "create_report")
     graph_builder.add_edge("create_report", END)
 
-    return graph_builder.compile()
+    result = graph_builder.compile()
+    print(result.get_graph().draw_mermaid())
+    return result

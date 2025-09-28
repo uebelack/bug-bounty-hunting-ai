@@ -103,4 +103,6 @@ Finish with a details report of the vulnerabilities you found.
     graph_builder.add_edge("store_result", "report")
     graph_builder.add_edge("report", END)
 
-    return graph_builder.compile()
+    result = graph_builder.compile()
+    print(result.get_graph().draw_mermaid())
+    return result

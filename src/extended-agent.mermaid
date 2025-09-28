@@ -1,0 +1,37 @@
+---
+config:
+  flowchart:
+    curve: linear
+  layout: dagre
+---
+flowchart LR
+ subgraph reconnaissance["Reconnaissance"]
+        reconnoitre("reconnoitre")
+        tools_recon("tools")
+        store_reconnaissance("store_reconnaissance")
+  end
+ subgraph planning["Plan"]
+        plan("plan")
+  end
+ subgraph execution["Execute"]
+        execute_task("execute_task")
+        tools_exec("tools")
+        store_result("store_result")
+        report("report")
+  end
+    reconnoitre -. &nbsp;__end__&nbsp; .-> store_reconnaissance
+    reconnoitre -.-> tools_recon
+    tools_recon --> reconnoitre
+    execute_task -. &nbsp;__end__&nbsp; .-> store_result
+    execute_task -.-> tools_exec
+    store_result --> report
+    tools_exec --> execute_task
+    __start__(["<p>__start__</p>"]) --> reconnoitre
+    store_reconnaissance --> plan
+    plan --> execute_task
+    report --> __end__(["<p>__end__</p>"])
+     __start__:::first
+     __end__:::last
+    classDef default fill:#f2f0ff,line-height:1.2
+    classDef first fill-opacity:0
+    classDef last fill:#bfb6fc

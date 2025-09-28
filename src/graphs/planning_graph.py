@@ -93,4 +93,6 @@ def create_planning_graph(llm: BaseChatModel):
     graph_builder.add_edge(START, "plan")
     graph_builder.add_edge("plan", END)
 
-    return graph_builder.compile()
+    result = graph_builder.compile()
+    print(result.get_graph().draw_mermaid())
+    return result

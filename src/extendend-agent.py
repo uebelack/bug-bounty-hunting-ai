@@ -5,10 +5,9 @@ from typing import TypedDict, List
 from graphs.reconnaissance_graph import create_reconnaissance_graph
 from graphs.planning_graph import create_planning_graph, Task
 from graphs.execution_graph import create_execution_graph
-from helpers.cached import cached
 
-# llm = init_chat_model("anthropic:claude-sonnet-4-20250514", max_tokens=8192)
-llm = init_chat_model("gpt-4o-mini")
+llm = init_chat_model("anthropic:claude-sonnet-4-20250514", max_tokens=8192)
+# llm = init_chat_model("gpt-4o-mini")
 
 reconnaissance_graph = create_reconnaissance_graph(llm)
 planning_graph = create_planning_graph(llm)
@@ -25,15 +24,13 @@ class State(TypedDict):
 
 # Reconnaissance Phase - gather information about the target website
 def reconnoitre(state: State):
-    subgraph_output = cached("reconnaissance", reconnaissance_graph.invoke)(
-        {"base_url": state["base_url"]}
-    )
+    subgraph_output = reconnaissance_graph.invoke({"base_url": state["base_url"]})
     return {"reconnaissance": subgraph_output["reconnaissance"]}
 
 
 # Planning Phase - create a test plan for the target website
 def plan(state: State):
-    subgraph_output = cached("plan", planning_graph.invoke)(
+    subgraph_output = planning_graph.invoke(
         {"base_url": state["base_url"], "reconnaissance": state["reconnaissance"]}
     )
 
@@ -63,7 +60,7 @@ def execute(state: State):
 
 
 def execution_routing(state: State):
-    if state["plan_index"] < 1:  # len(state["plan"]):
+    if state["plan_index"] < len(state["plan"]):
         return "execute"
     else:
         return END
@@ -81,10 +78,10 @@ graph_builder.add_conditional_edges("execute", execution_routing)
 
 graph = graph_builder.compile()
 
-graph.invoke(
-    {"base_url": "http://localhost:3000"},
-    {"recursion_limit": 100, "callbacks": [ResponseCallback()]},
-)
+# graph.invoke(
+#     {"base_url": "http://localhost:3000"},
+#     {"recursion_limit": 100, "callbacks": [ResponseCallback()]},
+# )
 
 
-# print(graph.get_graph().draw_mermaid())
+print(graph.get_graph().draw_mermaid())

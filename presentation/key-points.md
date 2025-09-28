@@ -37,6 +37,7 @@ Where to Start
 * Ask ChatGPT or your favorite LLM.
 * Must-know: OWASP and the Juice Shop app (intentionally insecure).
 * Juice Shop = perfect testing ground for my AI agents.
+* Last year developer conference, needed a side project to learn all this new nice AI stuff
 
 Attempt #1
 
@@ -44,29 +45,28 @@ Attempt #1
 * Doesn't really work, you can make Chat GPT to a simple security scan of your own website
 * And it's violating the terms of Chat GPT
 
-Juice Shop
-* ...
-* ...
-
 What is an LLM?
 
-* AI trained to understand and generate text
-* static knowlegde, doesn't learn during conversations
-* But the results are really impresive
-* We tend to expect far more from LLM's than they are capable of
-* You can build or use tools around LLM's that can reduce the limitations
+* A LLM is made to create human like text
+* You send a text to the model and you get an answer
+* The model is static, i can't learn or rember something by itself 
 
 What is an Agent?
 
 * An agent takes a goal: e.g. find the best restaurant in basel
 * Has access to a llm and tools like a web search engine
-* Gives the goal with the tools to the llm and the llm decides when the goal is achieved
+* repeatedly calls the llm and tools until it has achieved the goal
 
 LangChain & LangGraph
 
 * LangChain: tools & connectors for LLMs
 * LangGraph: orchestration of complex agent workflows
 * Python oss but pendants for JS and Java
+* Lize Raes
+
+Juice Shop
+* ...
+* ...
 
 Attempt #2
 

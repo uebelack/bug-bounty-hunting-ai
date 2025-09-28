@@ -78,4 +78,6 @@ def create_reconnaissance_graph(llm: BaseChatModel):
     graph_builder.add_edge("tools", "reconnoitre")
     graph_builder.add_edge("store_reconnaissance", END)
 
-    return graph_builder.compile()
+    result = graph_builder.compile()
+    print(result.get_graph().draw_mermaid())
+    return result
