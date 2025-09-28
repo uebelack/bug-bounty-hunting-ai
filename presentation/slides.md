@@ -246,7 +246,7 @@ Lightweight, open-source framework for AI-powered offensive & defensive automati
 * 📚 Research foundation for democratizing Cybersecurity AI
 
 <div style="padding-top: 50px;"/>
-https://aliasrobotics.github.io/cai/
+https://github.com/aliasrobotics/cai
 
 ---
 layout: center
