@@ -246,40 +246,24 @@ Lightweight, open-source framework for AI-powered offensive & defensive automati
 * 📚 Research foundation for democratizing Cybersecurity AI
 
 <div style="padding-top: 50px;"/>
-https://github.com/aliasrobotics/cai
+https://github.com/aliasrobotics/cai<br>
+https://aliasrobotics.com/
 
 ---
 layout: center
 ---
 
-TBD
+# Key Takeaways
+
+* 💸 **Expensive** — costs more than you earn in bounties, but saves money in pro security tests
+* 📏 **Context limits** — long prompts or big JS files confuse AI and break repeatability
+* 🔄 **Different models** — each AI behaves differently, don’t expect the same results
+* 🚨 **Easy attacks** — even unskilled hackers can launch AI-powered attacks
+* 🌟 **Impressive** — huge results possible with surprisingly little effort
+* ⚡ **Keep up** — defenders must also use AI to stay ahead
 
 ---
-layout: center
----
 
-# Learnings
-
-* Can be really expensive, but cheap compared to a human
-* Prompt, Context too long, js files
-* Model really behave differently, don't expect your are application works the same way with different models
-* Can't see that one was better than another
-* Perhaps another approach would be give access to a browser and to burp suite
-* Because of the context limitation its hard to make sure that the agent to do the same thing again and again
-* You can give a LLM a big task you have to split it up into small ones, the smaller and more detailed the instrucations the better the results
-
-
----
 <div style="display: flex; flex-direction: column; align-items: center;">
   <img src="./images/questions.jpg" style="width: 80%;"/>
-</div>
-
----
-
-# News
-
-<div style="display: flex; flex-direction: column; align-items: center; gap: 5px;">
-  <img src="./images/news02.jpg" style="width: 70%;"/>
-  <img src="./images/news03.jpg" style="width: 70%;"/>
-  <img src="./images/news01.jpg" style="width: 70%;"/>
 </div>
