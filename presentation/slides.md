@@ -231,6 +231,24 @@ layout: two-cols-header
 <img src="./images/attempt-3-juice.png" style="width: 85%"/>
 
 ---
+
+# Cybersecurity AI (CAI)
+
+Lightweight, open-source framework for AI-powered offensive & defensive automation. De facto AI Security framework, used by thousands of users & hundreds of organizations.
+
+<div style="padding-top: 40px;"/>
+
+* 🤖 300+ AI Models (OpenAI, Anthropic, DeepSeek, Ollama, …)
+* 🔧 Built-in security tools (reconnaissance, exploitation, privilege escalation)
+* 🏆 Battle-tested (HackTheBox, bug bounties, real-world cases)
+* 🎯 Agent-based modular architecture
+* 🛡️ Guardrails: protection against prompt injection & dangerous commands
+* 📚 Research foundation for democratizing Cybersecurity AI
+
+<div style="padding-top: 50px;"/>
+https://aliasrobotics.github.io/cai/
+
+---
 layout: center
 ---
 
