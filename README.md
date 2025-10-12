@@ -45,7 +45,7 @@ docker run -p 3000:3000 --rm bkimminich/juice-shop
 # Simple agent demo
 python src/simple-agent.py
 
-# Extended multi-phase agent (uncomment invoke() first)
+# Extended multi-phase agent
 python src/extendend-agent.py
 ```
 
@@ -62,7 +62,7 @@ yarn dev  # Opens at http://localhost:3030
 - **Talk**: Basel One 2025
 - **Speaker**: David Übelacker (nag informatik ag)
 - **Website**: [uebelacker.dev](https://uebelacker.dev)
-- **Alternative Framework**: [Cybersecurity AI (CAI)](https://aliasrobotics.github.io/cai/)
+- **Security Testing Assistant**: [Cybersecurity AI (CAI)](https://aliasrobotics.github.io/cai/)
 
 ## ⚠️ Disclaimer
 

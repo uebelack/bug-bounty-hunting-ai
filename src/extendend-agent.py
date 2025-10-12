@@ -6,8 +6,9 @@ from graphs.reconnaissance_graph import create_reconnaissance_graph
 from graphs.planning_graph import create_planning_graph, Task
 from graphs.execution_graph import create_execution_graph
 
-llm = init_chat_model("anthropic:claude-sonnet-4-20250514", max_tokens=8192)
+# llm = init_chat_model("anthropic:claude-sonnet-4-20250514", max_tokens=8192)
 # llm = init_chat_model("gpt-4o-mini")
+llm = init_chat_model("ollama:qwen3")
 
 reconnaissance_graph = create_reconnaissance_graph(llm)
 planning_graph = create_planning_graph(llm)
@@ -78,10 +79,7 @@ graph_builder.add_conditional_edges("execute", execution_routing)
 
 graph = graph_builder.compile()
 
-# graph.invoke(
-#     {"base_url": "http://localhost:3000"},
-#     {"recursion_limit": 100, "callbacks": [ResponseCallback()]},
-# )
-
-
-print(graph.get_graph().draw_mermaid())
+graph.invoke(
+    {"base_url": "http://localhost:3000"},
+    {"recursion_limit": 100, "callbacks": [ResponseCallback()]},
+)

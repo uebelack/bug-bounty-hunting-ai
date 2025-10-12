@@ -38,3 +38,7 @@
   min-height: 50px;
   padding-bottom: 10px;
 }
+
+.slidev-layout h1 + p, .col-header > p {
+  opacity: 1 !important;
+}

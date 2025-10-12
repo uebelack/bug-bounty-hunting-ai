@@ -1,6 +1,6 @@
 ---
 layout: cover
-colorSchema: light
+colorSchema: dark
 fonts:
   sans: Fira Code
   serif: Roboto Slab
@@ -9,7 +9,7 @@ fonts:
 
 # Bug Bounty Hunting with AI Agents
 
-### Can AI Agents Automate Bug Bounty Hunting?
+### Can I automate bug bounty hunting using AI agents?
 
 <div class="absolute bottom-10">
   <span class="font-700">
@@ -104,19 +104,25 @@ You can learn hacking by understanding cybersecurity fundamentals, practicing et
 layout: fact
 ---
 
+### Can I automate bug bounty hunting using AI agents?
+
+---
+
 # Attempt #1
+
+<img src="./images/chatgpt.png"/>
 
 ---
 
 <img src="./images/violation.png"/>
 
----
+<!-- ---
 
 # What is a LLM?
 
 **A Large Language Model (LLM) is a type of artificial intelligence designed to understand, predict, and generate human-like text.**
 
-<img src="./images/llm.svg" style="margin-top: 50px;"/>
+<img src="./images/llm.svg" style="margin-top: 50px;"/> -->
 
 ---
 
@@ -250,10 +256,10 @@ https://github.com/aliasrobotics/cai<br>
 https://aliasrobotics.com/
 
 ---
-layout: center
----
 
 # Key Takeaways
+
+These key takeaways highlight both the opportunities and challenges of using AI in security.
 
 * 💸 **Expensive** — costs more than you earn in bounties, but saves money in pro security tests
 * 📏 **Context limits** — long prompts or big JS files confuse AI and break repeatability
@@ -263,7 +269,7 @@ layout: center
 * ⚡ **Keep up** — defenders must also use AI to stay ahead
 
 ---
+layout: fact
+---
 
-<div style="display: flex; flex-direction: column; align-items: center;">
-  <img src="./images/questions.jpg" style="width: 80%;"/>
-</div>
+# Questions?

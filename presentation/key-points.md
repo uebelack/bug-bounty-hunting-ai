@@ -15,8 +15,8 @@ About Me
 Hacker Dreams
 
 * Always dreamed of being a notorious hacker.
-* Reality: I write Java POJOs every day.
 * Not great at hacking — but curious!
+* Reality: I write Java POJOs every day.
 
 Bug Bounty as a Hobby
 
@@ -38,6 +38,8 @@ Where to Start
 * Must-know: OWASP and the Juice Shop app (intentionally insecure).
 * Juice Shop = perfect testing ground for my AI agents.
 * Last year developer conference, needed a side project to learn all this new nice AI stuff
+
+5'
 
 Attempt #1
 
@@ -64,10 +66,53 @@ LangChain & LangGraph
 * Python oss but pendants for JS and Java
 * Lize Raes
 
+
 Juice Shop
-* ...
-* ...
 
-Attempt #2
+* Most insecure web application out there
+* Provided by OWASP for training purposes
 
+7'
+
+Attempt #2 — Result
+
+* Very little effort, impressive result
+
+12'
+
+Attempt #3
+
+* Three-phase agent application
+* Reconnaissance (analysis)
+* Planning of small hacking tasks
+* Execution using an additional analysis tool
+* Creating a report that includes everything needed, such as steps to reproduce
+
+Attempt #3 — Result
+
+* My dream of having an agent that automatically performs 24/7 bug-bounty hunting was no longer realistic — too expensive.
+* Researched whether others had the same idea.
+* All companies providing security tools are also integrating AI.
+* Found one promising open-source security tool I want to show you briefly at the end.
+
+14'
+
+Cybersecurity AI (CAI)
+
+* Open source
+* A lot of included tools
+* Extensible
+* An assistant that works like GitHub Copilot or Claude Code
+* From AliasRobotics, which does security testing of robots
+
+18'
+
+Key takeaways
+
+* Too expensive for fully automated bug-bounty hunting
+* Context size limits are a problem
+* Models differ significantly
+* Cybersecurity attacks have become easier to carry out
+* Impressive how much can be achieved with very little effort
+* Like us developers, security experts need to keep up with developments to avoid falling behind malicious attackers
 
