@@ -57,23 +57,9 @@ layout: two-cols-header
 
 Companies pay ethical hackers to find and report security vulnerabilities.
 
+<div style="padding-top: 40px;"/>
+
 ::left::
-
-### Why?
-
-- Improves security 🔐
-- Prevents cyberattacks 🚨
-- Rewards hackers 💰
-
-<br>
-
-### How does it work?
-
-- Hackers find bugs 🐞
-- Report them responsibly 📩
-- Get rewarded 🎉
-
-::right::
 
 ### Popular Platforms
 
@@ -82,24 +68,15 @@ Companies pay ethical hackers to find and report security vulnerabilities.
 - Intigriti (https://www.intigriti.com/)
 - 🇨🇭 Bug Bounty Switzerland (https://www.bugbounty.ch/)
 
----
-layout: two-cols-header
----
+::right::
 
-# How to learn hacking
+### How to learn hacking
 
-You can learn hacking by understanding cybersecurity fundamentals, practicing ethical hacking on platforms like Hack The Box and TryHackMe, exploring web security (OWASP Top 10), and developing problem-solving skills to identify and fix vulnerabilities.
-
-::left::
 
 - Web security (OWASP - The Open Worldwide Application Security Project) https://owasp.org/
 - Hack The Box https://www.hackthebox.com/
 - Try Hack Me https://tryhackme.com/
 - Ask ChatGPT
-
-::right::
-
-<img src="./images/juice.png"/>
 
 ---
 layout: fact
@@ -124,6 +101,12 @@ layout: fact
 **A Large Language Model (LLM) is a type of artificial intelligence designed to understand, predict, and generate human-like text.**
 
 <img src="./images/llm.svg" style="margin-top: 50px;"/> -->
+
+---
+layout: fact
+---
+
+# Attempt #2
 
 ---
 
@@ -182,12 +165,6 @@ OWASP Juice Shop is a modern, insecure web app used for security training, with 
 https://owasp.org/www-project-juice-shop/
 
 ---
-layout: fact
----
-
-# Attempt #2
-
----
 layout: two-cols-header
 ---
 
@@ -211,11 +188,11 @@ layout: two-cols-header
 
 Three-phase workflow agent
 
-* **Reconnaissance**: Identify vulnerabilities and attack vectors through systematic target analysis
-* **Plan**: Develop prioritized, actionable tasks based on reconnaissance findings
-* **Execute & Report**: Execute planned tasks and generate comprehensive vulnerability reports
+* Phase 1: **Reconnaissance**
+* Phase 2: **Plan**
+* Phase 3: **Execute & Report**
 
-<img src="./images/extended-agent.svg" style="padding-top: 30px;"/>
+<img src="./images/extended-agent.svg" style="padding-top: 60px;"/>
 
 
 https://github.com/uebelack/bug-bounty-hunting-ai
@@ -261,6 +238,8 @@ https://aliasrobotics.com/
 # Key Takeaways
 
 These key takeaways highlight both the opportunities and challenges of using AI in security.
+
+<div style="padding-top: 40px;"/>
 
 * 💸 **Expensive** — costs more than you earn in bounties, but saves money in pro security tests
 * 📏 **Context limits** — long prompts or big JS files confuse AI and break repeatability
