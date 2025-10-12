@@ -1,6 +1,7 @@
 ---
 layout: cover
 colorSchema: dark
+favicon: https://uebelacker.dev/favicon.ico
 fonts:
   sans: Fira Code
   serif: Roboto Slab
