@@ -5,6 +5,6 @@
       "destination": "/index.html"
     }
   ],
-  "buildCommand": "cd presentation && npm run build",
-  "outputDirectory": "presentation/dist"
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist"
 }
