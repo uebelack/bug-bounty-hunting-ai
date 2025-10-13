@@ -165,6 +165,12 @@ OWASP Juice Shop is a modern, insecure web app used for security training, with 
 https://owasp.org/www-project-juice-shop/
 
 ---
+layout: fact
+---
+
+# Demo
+
+---
 layout: two-cols-header
 ---
 

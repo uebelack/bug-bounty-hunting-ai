@@ -21,7 +21,7 @@ agent = create_react_agent(
 )
 
 USER_PROMPT = """
-Try to find a vulnarabilities in the following web application: \
+Try to find a vulnerabilities in the following web application: \
 http://localhost:3000/
 """
 
