@@ -194,8 +194,6 @@ Three-phase workflow agent
 
 <img src="./images/extended-agent.svg" style="padding-top: 60px;"/>
 
-
-https://github.com/uebelack/bug-bounty-hunting-ai
 ---
 layout: two-cols-header
 ---
@@ -253,3 +251,8 @@ layout: fact
 ---
 
 # Questions?
+
+<div style="display: flex; flex-direction: column; align-items: center;">
+  <img src="./images/qr2.svg" style="width: 25%; margin-bottom: 20px;"/>
+  <div>https://github.com/uebelack/bug-bounty-hunting-ai</div>
+</div>
