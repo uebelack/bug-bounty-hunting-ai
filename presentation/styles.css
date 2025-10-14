@@ -42,3 +42,8 @@
 .slidev-layout h1 + p, .col-header > p {
   opacity: 1 !important;
 }
+
+.emoji-list li {
+  list-style: none;
+  margin-left: 0;
+}

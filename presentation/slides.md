@@ -129,9 +129,13 @@ layout: two-cols-header
 
 A framework for building applications powered by LLMs. 
 
+<div class="emoji-list">
+
 * 🧠 Multiple LLM providers
 * 📦 Document and vector stores
 * 🛠️ External tools and APIs
+
+</div>
 
 ::right::
 
@@ -139,9 +143,13 @@ A framework for building applications powered by LLMs.
 
 A framework for building complex, stateful AI agent workflows with advanced orchestration.
 
-- 🗃️ **State management** - Persistent memory across steps
-- 🔵 **Nodes** - Workflow components
-- ➡️ **Edges** - Conditional logic
+<div class="emoji-list">
+
+* 🗃️ **State management** - Persistent memory
+* 🔵 **Nodes** - Workflow components
+* ➡️ **Edges** - Conditional logic
+
+</div>
 
 ::bottom::
 
@@ -226,6 +234,8 @@ Lightweight, open-source framework for AI-powered offensive & defensive automati
 
 <div style="padding-top: 40px;"/>
 
+<div class="emoji-list">
+
 * 🤖 300+ AI Models (OpenAI, Anthropic, DeepSeek, Ollama, …)
 * 🔧 Built-in security tools (reconnaissance, exploitation, privilege escalation)
 * 🏆 Battle-tested (HackTheBox, bug bounties, real-world cases)
@@ -233,9 +243,18 @@ Lightweight, open-source framework for AI-powered offensive & defensive automati
 * 🛡️ Guardrails: protection against prompt injection & dangerous commands
 * 📚 Research foundation for democratizing Cybersecurity AI
 
+</div>
+
 <div style="padding-top: 50px;"/>
+
 https://github.com/aliasrobotics/cai<br>
 https://aliasrobotics.com/
+
+---
+layout: fact
+---
+
+# Demo
 
 ---
 
@@ -245,12 +264,15 @@ These key takeaways highlight both the opportunities and challenges of using AI 
 
 <div style="padding-top: 40px;"/>
 
-* 💸 **Expensive** — costs more than you earn in bounties, but saves money in pro security tests
-* 📏 **Context limits** — long prompts or big JS files confuse AI and break repeatability
-* 🔄 **Different models** — each AI behaves differently, don’t expect the same results
-* 🚨 **Easy attacks** — even unskilled hackers can launch AI-powered attacks
-* 🌟 **Impressive** — huge results possible with surprisingly little effort
-* ⚡ **Keep up** — defenders must also use AI to stay ahead
+<div class="emoji-list">
+
+* 💸 **Expensive** costs more than you earn in bounties
+* 📏 **Context limits** — analysis of a lot of data runs fast into context limits
+* 🔄 **Different models** — models behave differently, don't expect the same results
+* 🚨 **Easy** — unskilled hackers can launch easily AI-powered attacks
+* ⚡ **Keep up** — security experts need to use AI in their daily work
+
+</div>
 
 ---
 layout: fact
@@ -260,5 +282,7 @@ layout: fact
 
 <div style="display: flex; flex-direction: column; align-items: center;">
   <img src="./images/qr2.svg" style="width: 25%; margin-bottom: 20px;"/>
-  <div>https://github.com/uebelack/bug-bounty-hunting-ai</div>
+  
+  https://github.com/uebelack/bug-bounty-hunting-ai
+
 </div>
