@@ -61,6 +61,7 @@ yarn dev  # Opens at http://localhost:3030
 
 - **Talk**: Basel One 2025
 - **Speaker**: David Übelacker (nag informatik ag)
+- **Presentation**: [bug-bounty-hunting-ai.vercel.app](https://bug-bounty-hunting-ai.vercel.app/)
 - **Website**: [uebelacker.dev](https://uebelacker.dev)
 - **Security Testing Assistant**: [Cybersecurity AI (CAI)](https://aliasrobotics.github.io/cai/)
 
