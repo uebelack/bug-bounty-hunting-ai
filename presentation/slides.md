@@ -286,3 +286,8 @@ layout: fact
   https://github.com/uebelack/bug-bounty-hunting-ai
 
 </div>
+
+---
+layout: image
+image: /images/sponsors.png
+---

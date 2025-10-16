@@ -1,9 +1,3 @@
-:root {
-  /* default theme color */
-  /* can be overrided by uses `themeConfig` option */
-  --slidev-theme-primary: #5d8392;
-}
-
 .slidev-layout.cover h1, .slidev-layout.intro h1 {
     font-size: 2.5rem !important;
     line-height: 1;
