@@ -8,9 +8,9 @@ fonts:
   mono: Fira Code
 ---
 
-# Bug Bounty Hunting with AI Agents
+# Caza de Bug Bounties con Agentes de IA
 
-### Can I automate bug bounty hunting using AI agents?
+### ¿Puedo automatizar la caza de bug bounties usando agentes de IA?
 
 <div class="absolute bottom-10">
   <span class="font-700">
@@ -20,11 +20,11 @@ fonts:
 
 ---
 
-# 👨‍💻 Who am I?
+# 👨‍💻 ¿Quién soy?
 
-- **David �belacker**
-- Software Architect @ nag informatik ag in Basel
-- 20+ years of experience in web and mobile application development
+- **David Übelacker**
+- Arquitecto de Software @ nag informatik ag en Basilea
+- Más de 20 años de experiencia en desarrollo de aplicaciones web y móviles
 
 <div class="absolute bottom-10">
   <div class="flex items-end">
@@ -39,13 +39,13 @@ fonts:
 
 ---
 
-# What I dream of doing
+# Lo que sueño hacer
 
 <img src="./images/hacker.png"/>
 
 ---
 
-# What I'm actually doing
+# Lo que realmente hago
 
 <img src="./images/pojo.png"/>
 
@@ -53,15 +53,15 @@ fonts:
 layout: two-cols-header
 ---
 
-# What is Bug Bounty Hunting?
+# ¿Qué es la Caza de Bug Bounties?
 
-Companies pay ethical hackers to find and report security vulnerabilities.
+Las empresas le pagan a hackers éticos para encontrar y reportar vulnerabilidades de seguridad.
 
 <div style="padding-top: 40px;"/>
 
 ::left::
 
-### Popular Platforms
+### Plataformas Populares
 
 - HackerOne (https://www.hackerone.com/)
 - Bugcrowd (https://www.bugcrowd.com/)
@@ -70,23 +70,23 @@ Companies pay ethical hackers to find and report security vulnerabilities.
 
 ::right::
 
-### How to learn hacking
+### Cómo aprender hacking
 
 
-- Web security (OWASP - The Open Worldwide Application Security Project) https://owasp.org/
+- Seguridad web (OWASP - The Open Worldwide Application Security Project) https://owasp.org/
 - Hack The Box https://www.hackthebox.com/
 - Try Hack Me https://tryhackme.com/
-- Ask ChatGPT
+- Preguntale a ChatGPT
 
 ---
 layout: fact
 ---
 
-### Can I automate bug bounty hunting using AI agents?
+### ¿Puedo automatizar la caza de bug bounties usando agentes de IA?
 
 ---
 
-# Attempt #1
+# Intento #1
 
 <img src="./images/chatgpt.png"/>
 
@@ -106,13 +106,13 @@ layout: fact
 layout: fact
 ---
 
-# Attempt #2
+# Intento #2
 
 ---
 
-# What is an AI Agent?
+# ¿Qué es un Agente de IA?
 
-An AI agent is a system that takes a goal, uses a large language model (LLM) and tools, and iterates until the goal is achieved.
+Un agente de IA es un sistema que toma un objetivo, usa un modelo de lenguaje grande (LLM) y herramientas, e itera hasta que se logra el objetivo.
 
 <img src="./images/agents.svg" style="padding-bottom: 20px;"/>
 
@@ -127,13 +127,13 @@ layout: two-cols-header
 
 ### LangChain
 
-A framework for building applications powered by LLMs. 
+Un framework para construir aplicaciones potenciadas por LLMs.
 
 <div class="emoji-list">
 
-* 🧠 Multiple LLM providers
-* 📦 Document and vector stores
-* 🛠️ External tools and APIs
+* 🧠 Múltiples proveedores de LLM
+* 📦 Almacenamiento de documentos y vectores
+* 🛠️ Herramientas externas y APIs
 
 </div>
 
@@ -141,19 +141,19 @@ A framework for building applications powered by LLMs.
 
 ### LangGraph
 
-A framework for building complex, stateful AI agent workflows with advanced orchestration.
+Un framework para construir flujos de trabajo complejos y con estado para agentes de IA con orquestación avanzada.
 
 <div class="emoji-list">
 
-* 🗃️ **State management** - Persistent memory
-* 🔵 **Nodes** - Workflow components
-* ➡️ **Edges** - Conditional logic
+* 🗃️ **Gestión de estado** - Memoria persistente
+* 🔵 **Nodos** - Componentes del flujo de trabajo
+* ➡️ **Aristas** - Lógica condicional
 
 </div>
 
 ::bottom::
 
-Both are frameworks for Python, but there are equivalents for JavaScript / TypeScript (**LangChain.js**) and Java (**LangChain4j**).
+Ambos son frameworks para Python, pero hay equivalentes para JavaScript / TypeScript (**LangChain.js**) y Java (**LangChain4j**).
 
 ---
 layout: two-cols-header
@@ -163,7 +163,7 @@ layout: two-cols-header
 
 ::left::
 
-OWASP Juice Shop is a modern, insecure web app used for security training, with hacking challenges and as a 'guinea pig' for security tools.
+OWASP Juice Shop es una aplicación web moderna e insegura usada para entrenamiento en seguridad, con desafíos de hacking y como 'conejillo de indias' para herramientas de seguridad.
 
 ::right::
 
@@ -182,14 +182,14 @@ layout: fact
 layout: two-cols-header
 ---
 
-# Attempt #2 - Result
+# Intento #2 - Resultado
 
 ::left::
 
-* Runtime: **2.5m**
+* Tiempo de ejecución: **2.5m**
 * Tokens: **1.144.127**
-* Costs: **3.47$**
-* Hacking Challenges Solved: **11**
+* Costo: **3.47$**
+* Desafíos de Hacking Resueltos: **11**
 
 ::right::
 
@@ -198,13 +198,13 @@ layout: two-cols-header
 
 ---
 
-# Attempt #3
+# Intento #3
 
-Three-phase workflow agent
+Agente de flujo de trabajo de tres fases
 
-* Phase 1: **Reconnaissance**
-* Phase 2: **Plan**
-* Phase 3: **Execute & Report**
+* Fase 1: **Reconocimiento**
+* Fase 2: **Planificación**
+* Fase 3: **Ejecución e Informe**
 
 <img src="./images/extended-agent.svg" style="padding-top: 60px;"/>
 
@@ -212,14 +212,14 @@ Three-phase workflow agent
 layout: two-cols-header
 ---
 
-# Attempt #3 - Result
+# Intento #3 - Resultado
 
 ::left::
 
-* Runtime: **73m**
+* Tiempo de ejecución: **73m**
 * Tokens: **21'242'728**
-* Costs: **65.59$**
-* Hacking Challenges Solved: **18**
+* Costo: **65.59$**
+* Desafíos de Hacking Resueltos: **18**
 
 
 ::right::
@@ -230,18 +230,18 @@ layout: two-cols-header
 
 # Cybersecurity AI (CAI)
 
-Lightweight, open-source framework for AI-powered offensive & defensive automation. De facto AI Security framework, used by thousands of users & hundreds of organizations.
+Framework liviano y de código abierto para automatización ofensiva y defensiva potenciada por IA. El framework de facto para Seguridad con IA, usado por miles de usuarios y cientos de organizaciones.
 
 <div style="padding-top: 40px;"/>
 
 <div class="emoji-list">
 
-* 🤖 300+ AI Models (OpenAI, Anthropic, DeepSeek, Ollama, …)
-* 🔧 Built-in security tools (reconnaissance, exploitation, privilege escalation)
-* 🏆 Battle-tested (HackTheBox, bug bounties, real-world cases)
-* 🎯 Agent-based modular architecture
-* 🛡️ Guardrails: protection against prompt injection & dangerous commands
-* 📚 Research foundation for democratizing Cybersecurity AI
+* 🤖 Más de 300 Modelos de IA (OpenAI, Anthropic, DeepSeek, Ollama, …)
+* 🔧 Herramientas de seguridad integradas (reconocimiento, explotación, escalada de privilegios)
+* 🏆 Probado en combate (HackTheBox, bug bounties, casos del mundo real)
+* 🎯 Arquitectura modular basada en agentes
+* 🛡️ Protecciones: prevención contra inyección de prompts y comandos peligrosos
+* 📚 Base de investigación para democratizar la IA en Ciberseguridad
 
 </div>
 
@@ -258,19 +258,19 @@ layout: fact
 
 ---
 
-# Key Takeaways
+# Conclusiones Clave
 
-These key takeaways highlight both the opportunities and challenges of using AI in security.
+Estas conclusiones destacan tanto las oportunidades como los desafíos de usar IA en seguridad.
 
 <div style="padding-top: 40px;"/>
 
 <div class="emoji-list">
 
-* 💸 **Expensive** costs more than you earn in bounties
-* 📏 **Context limits** — analysis of a lot of data runs fast into context limits
-* 🔄 **Different models** — models behave differently, don't expect the same results
-* 🚨 **Easy** — unskilled hackers can launch easily AI-powered attacks
-* ⚡ **Keep up** — security experts need to use AI in their daily work
+* 💸 **Costoso** — cuesta más de lo que ganás en recompensas
+* 📏 **Límites de contexto** — el análisis de muchos datos rápidamente alcanza los límites de contexto
+* 🔄 **Diferentes modelos** — los modelos se comportan diferente, no esperes los mismos resultados
+* 🚨 **Fácil** — hackers sin experiencia pueden lanzar ataques potenciados por IA fácilmente
+* ⚡ **Mantenerse actualizado** — los expertos en seguridad necesitan usar IA en su trabajo diario
 
 </div>
 
@@ -278,7 +278,7 @@ These key takeaways highlight both the opportunities and challenges of using AI 
 layout: fact
 ---
 
-# Questions?
+# ¿Preguntas?
 
 <div style="display: flex; flex-direction: column; align-items: center;">
   <img src="./images/qr2.svg" style="width: 25%; margin-bottom: 20px;"/>
