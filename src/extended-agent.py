@@ -6,10 +6,13 @@ from graphs.reconnaissance_graph import create_reconnaissance_graph
 from graphs.planning_graph import create_planning_graph, Task
 from graphs.execution_graph import create_execution_graph
 from langchain_ollama import ChatOllama
+import os
 
 # llm = init_chat_model("anthropic:claude-sonnet-4-20250514", max_tokens=8192)
 # llm = init_chat_model("gpt-4o-mini")
-llm = ChatOllama(base_url="http://192.168.222.220:11434", model="qwen3:32b")
+
+model = os.environ.get("LLM_MODEL", "qwen3-coder:30b")
+llm = ChatOllama(base_url="http://192.168.222.220:11434", model=model)
 
 reconnaissance_graph = create_reconnaissance_graph(llm)
 planning_graph = create_planning_graph(llm)
