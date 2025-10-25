@@ -1,118 +1,118 @@
-Introduction
+Introducción
 
-* Hello everyone, thanks for joining my talk.
-* Topic: Bug Bounty Hunting with AI Agents
+* Hola a todos, gracias por venir a mi charla.
+* Tema: Caza de Bug Bounties con Agentes de IA
 
-About Me
+Sobre Mí
 
-* I’m David, a software developer.
-* Software architect at nag in Basel (nag.ch).
-* Small but great company, good employer and IT partner.
-* 20+ years experience in web & mobile development.
-* Still struggling with encodings as you can see on my lastname.
-* Contact: ueblacker.dev or scan the QR code.
+* Soy David, desarrollador de software.
+* Arquitecto de software en nag en Basilea (nag.ch).
+* Empresa chica pero genial, buen empleador y socio de IT.
+* Más de 20 años de experiencia en desarrollo web y móvil.
+* Todavía luchando con las codificaciones como pueden ver en mi apellido.
+* Contacto: ueblacker.dev o escaneen el código QR.
 
-Hacker Dreams
+Sueños de Hacker
 
-* Always dreamed of being a notorious hacker.
-* Not great at hacking — but curious!
-* Reality: I write Java POJOs every day.
+* Siempre soñé con ser un hacker notorio.
+* No soy muy bueno hackeando — ¡pero tengo curiosidad!
+* Realidad: escribo POJOs de Java todos los días.
 
-Bug Bounty as a Hobby
+Bug Bounty como Hobby
 
-* Got into bug bounty hunting out of interest in pentesting.
-* It’s like solving puzzles — and you can get paid!
-* Helps developers avoid security mistakes.
+* Me metí en la caza de bug bounties por interés en el pentesting.
+* Es como resolver puzzles — ¡y te pueden pagar!
+* Ayuda a los desarrolladores a evitar errores de seguridad.
 
-What is Bug Bounty Hunting?
+¿Qué es la Caza de Bug Bounties?
 
-* Find & report security vulnerabilities before attackers do.
-* Companies create programs with clear rules & scope.
-* Legal & ethical hacking — rewards include money or recognition.
+* Encontrar y reportar vulnerabilidades de seguridad antes que los atacantes.
+* Las empresas crean programas con reglas y alcance claros.
+* Hacking legal y ético — las recompensas incluyen dinero o reconocimiento.
 
-Where to Start
+Dónde Empezar
 
-* Platforms: HackerOne, BugCrowd, BugBountySwitzerland.
-* Learn with Hack The Box, TryHackMe.
-* Ask ChatGPT or your favorite LLM.
-* Must-know: OWASP and the Juice Shop app (intentionally insecure).
-* Juice Shop = perfect testing ground for my AI agents.
-* Last year developer conference, needed a side project to learn all this new nice AI stuff
+* Plataformas: HackerOne, BugCrowd, BugBountySwitzerland.
+* Aprender con Hack The Box, TryHackMe.
+* Preguntarle a ChatGPT o tu LLM favorito.
+* Debe saber: OWASP y la app Juice Shop (intencionalmente insegura).
+* Juice Shop = terreno perfecto de pruebas para mis agentes de IA.
+* El año pasado en la conferencia de desarrolladores, necesitaba un proyecto paralelo para aprender toda esta nueva tecnología de IA
 
 5'
 
-Attempt #1
+Intento #1
 
-* Just use chat GPT "Please hack tesla.com"
-* Doesn't really work, you can make Chat GPT to a simple security scan of your own website
-* And it's violating the terms of Chat GPT
+* Solo usar chat GPT "Por favor hackea tesla.com"
+* No funciona realmente, podés hacer que Chat GPT haga un escaneo de seguridad simple de tu propio sitio web
+* Y está violando los términos de Chat GPT
 
-What is an LLM?
+¿Qué es un LLM?
 
-* A LLM is made to create human like text
-* You send a text to the model and you get an answer
-* The model is static, i can't learn or rember something by itself 
+* Un LLM está hecho para crear texto similar al humano
+* Enviás un texto al modelo y obtenés una respuesta
+* El modelo es estático, no puede aprender o recordar algo por sí mismo
 
-What is an Agent?
+¿Qué es un Agente?
 
-* An agent takes a goal: e.g. find the best restaurant in basel
-* Has access to a llm and tools like a web search engine
-* repeatedly calls the llm and tools until it has achieved the goal
+* Un agente toma un objetivo: ej. encontrar el mejor restaurante en basilea
+* Tiene acceso a un llm y herramientas como un motor de búsqueda web
+* llama repetidamente al llm y herramientas hasta que ha logrado el objetivo
 
 LangChain & LangGraph
 
-* LangChain: tools & connectors for LLMs
-* LangGraph: orchestration of complex agent workflows
-* Python oss but pendants for JS and Java
+* LangChain: herramientas y conectores para LLMs
+* LangGraph: orquestación de flujos de trabajo complejos de agentes
+* Python open source pero hay equivalentes para JS y Java
 * Lize Raes
 
 
 Juice Shop
 
-* Most insecure web application out there
-* Provided by OWASP for training purposes
+* La aplicación web más insegura que existe
+* Proporcionada por OWASP para propósitos de entrenamiento
 
 7'
 
-Attempt #2 — Result
+Intento #2 — Resultado
 
-* Very little effort, impressive result
+* Muy poco esfuerzo, resultado impresionante
 
 12'
 
-Attempt #3
+Intento #3
 
-* Three-phase agent application
-* Reconnaissance (analysis)
-* Planning of small hacking tasks
-* Execution using an additional analysis tool
-* Creating a report that includes everything needed, such as steps to reproduce
+* Aplicación de agente de tres fases
+* Reconocimiento (análisis)
+* Planificación de pequeñas tareas de hacking
+* Ejecución usando una herramienta de análisis adicional
+* Crear un reporte que incluye todo lo necesario, como pasos para reproducir
 
-Attempt #3 — Result
+Intento #3 — Resultado
 
-* My dream of having an agent that automatically performs 24/7 bug-bounty hunting was no longer realistic — too expensive.
-* Researched whether others had the same idea.
-* All companies providing security tools are also integrating AI.
-* Found one promising open-source security tool I want to show you briefly at the end.
+* Mi sueño de tener un agente que automáticamente realice caza de bug bounties 24/7 ya no era realista — muy caro.
+* Investigué si otros tenían la misma idea.
+* Todas las empresas que proporcionan herramientas de seguridad también están integrando IA.
+* Encontré una herramienta de seguridad open source prometedora que quiero mostrarles brevemente al final.
 
 14'
 
 Cybersecurity AI (CAI)
 
 * Open source
-* A lot of included tools
+* Muchas herramientas incluidas
 * Extensible
-* An assistant that works like GitHub Copilot or Claude Code
-* From AliasRobotics, which does security testing of robots
+* Un asistente que funciona como GitHub Copilot o Claude Code
+* De AliasRobotics, que hace testing de seguridad de robots
 
 18'
 
-Key takeaways
+Puntos clave
 
-* Too expensive for fully automated bug-bounty hunting
-* Context size limits are a problem
-* Models differ significantly
-* Cybersecurity attacks have become easier to carry out
-* Impressive how much can be achieved with very little effort
-* Like us developers, security experts need to keep up with developments to avoid falling behind malicious attackers
+* Muy caro para caza de bug bounties completamente automatizada
+* Los límites de tamaño de contexto son un problema
+* Los modelos difieren significativamente
+* Los ataques de ciberseguridad se han vuelto más fáciles de llevar a cabo
+* Impresionante cuánto se puede lograr con muy poco esfuerzo
+* Como nosotros los desarrolladores, los expertos en seguridad necesitan mantenerse al día con los desarrollos para no quedarse atrás de los atacantes maliciosos
 
