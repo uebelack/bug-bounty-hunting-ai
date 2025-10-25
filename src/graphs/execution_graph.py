@@ -51,6 +51,7 @@ The reconnaissance team has already completed the reconnaissance phase and
 the planning team has already created a test plan.
 Your job is to execute one of the test plan items and find vulnerabilities in the target website.
 You will use the tools provided to you to execute the test plan item.
+Only report vulnerabilities that your where able to exploit.
 """
 
 
