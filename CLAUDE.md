@@ -17,7 +17,7 @@ The project uses a multi-phase agent architecture:
 
 Main agent implementations:
 - `src/simple-agent.py`: Basic ReAct agent using RequestsToolkit
-- `src/extendend-agent.py`: Multi-phase state graph with subgraphs for each phase
+- `src/extended-agent.py`: Multi-phase state graph with subgraphs for each phase
 
 ## Development Commands
 
@@ -26,7 +26,7 @@ Main agent implementations:
 python src/simple-agent.py
 
 # Run the extended agent (uncomment the invoke() call first)
-python src/extendend-agent.py
+python src/extended-agent.py
 
 # Start the test target (Juice Shop)
 docker run -p 3000:3000 --rm bkimminich/juice-shop

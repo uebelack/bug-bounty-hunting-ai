@@ -20,7 +20,7 @@ Slidev-based presentation covering:
 Three demonstration approaches showing the evolution of AI bug hunting:
 
 1. **Simple Agent** (`simple-agent.py`) - Basic ReAct agent using LangChain
-2. **Extended Agent** (`extendend-agent.py`) - Multi-phase workflow with reconnaissance, planning, and execution
+2. **Extended Agent** (`extended-agent.py`) - Multi-phase workflow with reconnaissance, planning, and execution
 
 ## 🚀 Running the Demos
 
@@ -46,7 +46,7 @@ docker run -p 3000:3000 --rm bkimminich/juice-shop
 python src/simple-agent.py
 
 # Extended multi-phase agent
-python src/extendend-agent.py
+python src/extended-agent.py
 ```
 
 ### View Presentation
